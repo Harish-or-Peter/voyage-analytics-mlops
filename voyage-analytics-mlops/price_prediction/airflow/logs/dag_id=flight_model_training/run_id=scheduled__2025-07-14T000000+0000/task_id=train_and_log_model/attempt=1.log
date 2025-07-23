@@ -1,0 +1,398 @@
+[2025-07-15T19:50:28.502+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T19:50:28.538+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T19:50:28.547+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T19:50:28.548+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T19:50:28.566+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T19:50:28.577+0000] {standard_task_runner.py:63} INFO - Started process 300 to run task
+[2025-07-15T19:50:28.589+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmpr44ohq97']
+[2025-07-15T19:50:28.601+0000] {standard_task_runner.py:91} INFO - Job 2: Subtask train_and_log_model
+[2025-07-15T19:50:28.693+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host 778895c79c4a
+[2025-07-15T19:50:28.794+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T19:50:28.796+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T19:50:28.825+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T19:50:28.826+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 16, in train_model
+    df = pd.read_csv('/opt/airflow/data/flights.csv')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/parsers/readers.py", line 1705, in _make_engine
+    self.handles = get_handle(
+                   ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/pandas/io/common.py", line 863, in get_handle
+    handle = open(
+             ^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/data/flights.csv'
+[2025-07-15T19:50:28.855+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T195028, end_date=20250715T195028
+[2025-07-15T19:50:28.879+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2 for task train_and_log_model ([Errno 2] No such file or directory: '/opt/airflow/data/flights.csv'; 300)
+[2025-07-15T19:50:28.917+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T19:50:28.931+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T19:50:28.935+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-15T19:57:20.057+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T19:57:20.082+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T19:57:20.088+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T19:57:20.089+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T19:57:20.104+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T19:57:20.113+0000] {standard_task_runner.py:63} INFO - Started process 301 to run task
+[2025-07-15T19:57:20.120+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmpr97g0vqa']
+[2025-07-15T19:57:20.123+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask train_and_log_model
+[2025-07-15T19:57:20.172+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host 65b630699360
+[2025-07-15T19:57:20.274+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T19:57:20.275+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T19:58:10.366+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T19:58:10.367+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 45, in train_model
+    mlflow.set_experiment("flight_price_airflow")
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/tracking/fluent.py", line 183, in set_experiment
+    experiment = client.get_experiment_by_name(experiment_name)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/tracking/_tracking_service/client.py", line 258, in get_experiment_by_name
+    return self.store.get_experiment_by_name(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/store/tracking/rest_store.py", line 869, in get_experiment_by_name
+    response_proto = self._call_endpoint(GetExperimentByName, req_body)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/store/tracking/rest_store.py", line 135, in _call_endpoint
+    return call_endpoint(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/utils/rest_utils.py", line 590, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/utils/rest_utils.py", line 310, in verify_rest_response
+    raise MlflowException(
+mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/experiments/get-by-name failed with error code 404 != 200. Response body: '<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+'
+[2025-07-15T19:58:10.382+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T195720, end_date=20250715T195810
+[2025-07-15T19:58:10.400+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3 for task train_and_log_model (API request to endpoint /api/2.0/mlflow/experiments/get-by-name failed with error code 404 != 200. Response body: '<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+'; 301)
+[2025-07-15T19:58:10.453+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T19:58:10.468+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T19:58:10.472+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-15T20:07:06.845+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T20:07:06.866+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:07:06.872+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:07:06.873+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T20:07:06.883+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T20:07:06.890+0000] {standard_task_runner.py:63} INFO - Started process 265 to run task
+[2025-07-15T20:07:06.894+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmp0ddprtgu']
+[2025-07-15T20:07:06.897+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask train_and_log_model
+[2025-07-15T20:07:06.946+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host 81bf1b3da9f5
+[2025-07-15T20:07:07.017+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T20:07:07.018+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T20:07:53.560+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T20:07:53.561+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 46, in train_model
+    mlflow.set_experiment("flight_price_airflow")
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/tracking/fluent.py", line 183, in set_experiment
+    experiment = client.get_experiment_by_name(experiment_name)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/tracking/_tracking_service/client.py", line 258, in get_experiment_by_name
+    return self.store.get_experiment_by_name(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/store/tracking/rest_store.py", line 869, in get_experiment_by_name
+    response_proto = self._call_endpoint(GetExperimentByName, req_body)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/store/tracking/rest_store.py", line 135, in _call_endpoint
+    return call_endpoint(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/utils/rest_utils.py", line 590, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/utils/rest_utils.py", line 310, in verify_rest_response
+    raise MlflowException(
+mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/experiments/get-by-name failed with error code 404 != 200. Response body: '<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+'
+[2025-07-15T20:07:53.572+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T200706, end_date=20250715T200753
+[2025-07-15T20:07:53.582+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3 for task train_and_log_model (API request to endpoint /api/2.0/mlflow/experiments/get-by-name failed with error code 404 != 200. Response body: '<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+'; 265)
+[2025-07-15T20:07:53.617+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T20:07:53.628+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T20:07:53.630+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-15T20:17:19.478+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T20:17:19.506+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:17:19.514+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:17:19.515+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T20:17:19.527+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T20:17:19.538+0000] {standard_task_runner.py:63} INFO - Started process 300 to run task
+[2025-07-15T20:17:19.541+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmpcjx2b_1d']
+[2025-07-15T20:17:19.545+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask train_and_log_model
+[2025-07-15T20:17:19.596+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host b121470c8b52
+[2025-07-15T20:17:19.674+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T20:17:19.675+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T20:18:08.024+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T20:18:08.025+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 46, in train_model
+    mlflow.set_experiment("flight_price_airflow")
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/tracking/fluent.py", line 183, in set_experiment
+    experiment = client.get_experiment_by_name(experiment_name)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/tracking/_tracking_service/client.py", line 258, in get_experiment_by_name
+    return self.store.get_experiment_by_name(name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/store/tracking/rest_store.py", line 869, in get_experiment_by_name
+    response_proto = self._call_endpoint(GetExperimentByName, req_body)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/store/tracking/rest_store.py", line 135, in _call_endpoint
+    return call_endpoint(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/utils/rest_utils.py", line 590, in call_endpoint
+    response = verify_rest_response(response, endpoint)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/mlflow/utils/rest_utils.py", line 310, in verify_rest_response
+    raise MlflowException(
+mlflow.exceptions.MlflowException: API request to endpoint /api/2.0/mlflow/experiments/get-by-name failed with error code 404 != 200. Response body: '<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+'
+[2025-07-15T20:18:08.042+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T201719, end_date=20250715T201808
+[2025-07-15T20:18:08.052+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3 for task train_and_log_model (API request to endpoint /api/2.0/mlflow/experiments/get-by-name failed with error code 404 != 200. Response body: '<!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+'; 300)
+[2025-07-15T20:18:08.079+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T20:18:08.091+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T20:18:08.096+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-15T20:25:07.264+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T20:25:07.291+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:25:07.302+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:25:07.303+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T20:25:07.314+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T20:25:07.322+0000] {standard_task_runner.py:63} INFO - Started process 299 to run task
+[2025-07-15T20:25:07.326+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmp0hxtipzp']
+[2025-07-15T20:25:07.331+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask train_and_log_model
+[2025-07-15T20:25:07.399+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host 9bf486a052b0
+[2025-07-15T20:25:07.488+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T20:25:07.489+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T20:25:53.132+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:25:53 INFO mlflow.tracking.fluent: Experiment with name 'flight_price_***' does not exist. Creating a new experiment.
+[2025-07-15T20:25:53.291+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:25:53 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-07-15T20:25:54.097+0000] {logging_mixin.py:188} INFO - 🏃 View run loud-shad-168 at: http://mlflow:5000/#/experiments/474368820096796256/runs/321393ebd57b44b586de8fe178501021
+[2025-07-15T20:25:54.097+0000] {logging_mixin.py:188} INFO - 🧪 View experiment at: http://mlflow:5000/#/experiments/474368820096796256
+[2025-07-15T20:25:54.157+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T20:25:54.157+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 50, in train_model
+    mlflow.log_metric("rmse", rmse = np.sqrt(mean_squared_error(y_test, y_pred)))
+TypeError: log_metric() got an unexpected keyword argument 'rmse'
+[2025-07-15T20:25:54.175+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T202507, end_date=20250715T202554
+[2025-07-15T20:25:54.187+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3 for task train_and_log_model (log_metric() got an unexpected keyword argument 'rmse'; 299)
+[2025-07-15T20:25:54.217+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T20:25:54.234+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T20:25:54.236+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-15T20:31:42.140+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T20:31:42.172+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:31:42.181+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:31:42.182+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T20:31:42.195+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T20:31:42.206+0000] {standard_task_runner.py:63} INFO - Started process 299 to run task
+[2025-07-15T20:31:42.210+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmp9dhhleyj']
+[2025-07-15T20:31:42.214+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask train_and_log_model
+[2025-07-15T20:31:42.275+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host 88a25da025bd
+[2025-07-15T20:31:42.368+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T20:31:42.370+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T20:32:28.362+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:32:28 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-07-15T20:32:29.358+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:32:29 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+[2025-07-15T20:32:34.280+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:32:34 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.
+[2025-07-15T20:32:34.870+0000] {logging_mixin.py:188} INFO - 🏃 View run trusting-steed-415 at: http://mlflow:5000/#/experiments/474368820096796256/runs/9bf69c452ce1443b997030b0c4629f03
+[2025-07-15T20:32:34.871+0000] {logging_mixin.py:188} INFO - 🧪 View experiment at: http://mlflow:5000/#/experiments/474368820096796256
+[2025-07-15T20:32:34.931+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T20:32:34.932+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 54, in train_model
+    joblib.dump(model, '/opt/airflow/artifacts/flight_price_model.pkl')
+  File "/home/airflow/.local/lib/python3.11/site-packages/joblib/numpy_pickle.py", line 599, in dump
+    with open(filename, "wb") as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/artifacts/flight_price_model.pkl'
+[2025-07-15T20:32:34.952+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T203142, end_date=20250715T203234
+[2025-07-15T20:32:34.963+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 3 for task train_and_log_model ([Errno 2] No such file or directory: '/opt/airflow/artifacts/flight_price_model.pkl'; 299)
+[2025-07-15T20:32:35.008+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T20:32:35.019+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T20:32:35.022+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2025-07-15T20:55:28.445+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T20:55:28.474+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:55:28.482+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [queued]>
+[2025-07-15T20:55:28.483+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-07-15T20:55:28.495+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-14 00:00:00+00:00
+[2025-07-15T20:55:28.504+0000] {standard_task_runner.py:63} INFO - Started process 266 to run task
+[2025-07-15T20:55:28.509+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'scheduled__2025-07-14T00:00:00+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmppv5c4h9g']
+[2025-07-15T20:55:28.513+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask train_and_log_model
+[2025-07-15T20:55:28.567+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model scheduled__2025-07-14T00:00:00+00:00 [running]> on host ec77630edb53
+[2025-07-15T20:55:28.647+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-14T00:00:00+00:00'
+[2025-07-15T20:55:28.648+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T20:56:13.881+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:56:13 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-07-15T20:56:14.628+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:56:14 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+[2025-07-15T20:56:19.603+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:56:19 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.
+[2025-07-15T20:56:20.714+0000] {logging_mixin.py:188} INFO - 🏃 View run youthful-ape-675 at: http://mlflow:5000/#/experiments/474368820096796256/runs/c11570995d904210aa26d9d8b670224a
+[2025-07-15T20:56:20.715+0000] {logging_mixin.py:188} INFO - 🧪 View experiment at: http://mlflow:5000/#/experiments/474368820096796256
+[2025-07-15T20:56:21.199+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-15T20:56:21.201+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T20:56:21.212+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=flight_model_training, task_id=train_and_log_model, run_id=scheduled__2025-07-14T00:00:00+00:00, execution_date=20250714T000000, start_date=20250715T205528, end_date=20250715T205621
+[2025-07-15T20:56:21.279+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-15T20:56:21.295+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T20:56:21.297+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

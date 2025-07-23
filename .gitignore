@@ -1,0 +1,25 @@
+
+---
+
+## 📌 **Step 4: .gitignore Example**
+
+```gitignore
+# Python
+__pycache__/
+*.py[cod]
+*.pkl
+*.joblib
+
+# Jupyter / IDEs
+.ipynb_checkpoints
+.vscode/
+
+# Datasets / Artifacts
+*.csv
+/data/
+artifacts/
+mlruns/
+model/
+
+# OS
+.DS_Store

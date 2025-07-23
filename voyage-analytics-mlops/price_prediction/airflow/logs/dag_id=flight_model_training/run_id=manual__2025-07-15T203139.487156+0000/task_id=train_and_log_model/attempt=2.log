@@ -1,0 +1,60 @@
+[2025-07-15T20:34:47.421+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-15T20:34:47.454+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model manual__2025-07-15T20:31:39.487156+00:00 [queued]>
+[2025-07-15T20:34:47.463+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: flight_model_training.train_and_log_model manual__2025-07-15T20:31:39.487156+00:00 [queued]>
+[2025-07-15T20:34:47.464+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2025-07-15T20:34:47.481+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): train_and_log_model> on 2025-07-15 20:31:39.487156+00:00
+[2025-07-15T20:34:47.491+0000] {standard_task_runner.py:63} INFO - Started process 468 to run task
+[2025-07-15T20:34:47.494+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'flight_model_training', 'train_and_log_model', 'manual__2025-07-15T20:31:39.487156+00:00', '--job-id', '4', '--raw', '--subdir', 'DAGS_FOLDER/flight_model_dag.py', '--cfg-path', '/tmp/tmppuf6mh0g']
+[2025-07-15T20:34:47.497+0000] {standard_task_runner.py:91} INFO - Job 4: Subtask train_and_log_model
+[2025-07-15T20:34:47.554+0000] {task_command.py:426} INFO - Running <TaskInstance: flight_model_training.train_and_log_model manual__2025-07-15T20:31:39.487156+00:00 [running]> on host 88a25da025bd
+[2025-07-15T20:34:47.635+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='flight_model_training' AIRFLOW_CTX_TASK_ID='train_and_log_model' AIRFLOW_CTX_EXECUTION_DATE='2025-07-15T20:31:39.487156+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-15T20:31:39.487156+00:00'
+[2025-07-15T20:34:47.637+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-15T20:35:32.513+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:35:32 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+[2025-07-15T20:35:33.777+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:35:33 WARNING mlflow.models.model: `artifact_path` is deprecated. Please use `name` instead.
+[2025-07-15T20:35:38.049+0000] {logging_mixin.py:188} WARNING - 2025/07/15 20:35:38 WARNING mlflow.models.model: Model logged without a signature and input example. Please set `input_example` parameter when logging the model to auto infer the model signature.
+[2025-07-15T20:35:38.504+0000] {logging_mixin.py:188} INFO - 🏃 View run merciful-rook-725 at: http://mlflow:5000/#/experiments/474368820096796256/runs/1c6ddf01474f46d8a28d0fe9356804fb
+[2025-07-15T20:35:38.505+0000] {logging_mixin.py:188} INFO - 🧪 View experiment at: http://mlflow:5000/#/experiments/474368820096796256
+[2025-07-15T20:35:38.533+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-15T20:35:38.534+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 400, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/flight_model_dag.py", line 54, in train_model
+    joblib.dump(model, '/opt/airflow/artifacts/flight_price_model.pkl')
+  File "/home/airflow/.local/lib/python3.11/site-packages/joblib/numpy_pickle.py", line 599, in dump
+    with open(filename, "wb") as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/opt/airflow/artifacts/flight_price_model.pkl'
+[2025-07-15T20:35:38.543+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=flight_model_training, task_id=train_and_log_model, run_id=manual__2025-07-15T20:31:39.487156+00:00, execution_date=20250715T203139, start_date=20250715T203447, end_date=20250715T203538
+[2025-07-15T20:35:38.553+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 4 for task train_and_log_model ([Errno 2] No such file or directory: '/opt/airflow/artifacts/flight_price_model.pkl'; 468)
+[2025-07-15T20:35:38.594+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-15T20:35:38.604+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-15T20:35:38.606+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

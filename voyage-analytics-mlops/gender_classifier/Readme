@@ -1,0 +1,240 @@
+1. Data Understanding & Preprocessing
+✅ Tasks:
+Clean and analyze the Users dataset
+
+Drop rows where gender == 'none' (optional but recommended for classification)
+
+Encode features: company, name, age, name_length, etc.
+
+Create additional features like:
+
+name_length
+
+title (if extractable)
+
+Merge flights/hotels to add: avg_flight_price, travel_count, etc.
+
+✅ Tools:
+Python, Pandas, Scikit-learn
+
+2. Model Development (Gender Classification)
+✅ Target:
+Predict gender → male or female
+
+✅ Steps:
+Train/test split
+
+Try models:
+
+Logistic Regression (baseline)
+
+Random Forest / XGBoost (boosted models)
+
+Handle class imbalance if needed (SMOTE, class_weight)
+
+Evaluate using:
+
+Accuracy
+
+Precision, Recall, F1-Score
+
+Confusion Matrix
+
+(Optional: ROC-AUC)
+
+✅ Output:
+Trained .pkl model
+
+Evaluation results
+
+✅ Tools:
+Scikit-learn, XGBoost, Joblib
+
+3. Model Deployment with Flask API
+✅ Tasks:
+Create a REST endpoint /predict_gender(accesable at http://127.0.0.1:5000)
+
+Accept JSON input (user features), return predicted gender
+
+Example input:
+
+json
+Copy
+Edit
+{
+  "age": 30,
+  "company": "4You",
+  "name_length": 12
+}
+✅ Tools:
+Flask, joblib/pickle
+
+4. Dockerization
+✅ Tasks:
+Create Dockerfile for Flask app
+
+Include requirements.txt
+
+✅ Tools:
+Docker
+
+5. Kubernetes Deployment
+✅ Tasks:
+Write gender-deployment.yml and gender-service.yml
+
+Use kubectl to deploy
+
+✅ Tools:
+Kubernetes (Minikube or cloud)
+
+6. Airflow Automation (Optional but Recommended)
+✅ Use Case:
+Schedule:
+
+Weekly retraining of the gender classifier
+
+Inference on new user data
+
+✅ Tools:
+Apache Airflow, Python DAG
+
+7. MLflow Tracking
+✅ Tasks:
+Log:
+
+Model type
+
+Parameters
+
+Accuracy, F1-score
+
+Trained model artifact
+
+✅ Tools:
+MLflow
+
+8. CI/CD Pipeline (Jenkins)
+✅ Tasks:
+Automate:
+
+Testing
+
+Docker build
+
+K8s deployment
+
+Store Jenkinsfile in repo
+
+✅ Tools:
+Jenkins, GitHub
+
+9. Deliverables Structure (for submission)
+📁 GitHub Repo (Single repo for the whole MLOps process):
+
+Copy
+Edit
+├── gender_classifier/
+│   ├── model.pkl
+│   ├── app.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── gender-deployment.yml
+│   ├── gender-service.yml
+│   ├── mlflow_logging.py
+│   ├── airflow_dag.py
+│   └── Jenkinsfile
+└── classification_notebook.ipynb
+📄 Google Docs:
+
+Document each of the above stages only for classification model
+
+Include screenshots from:
+
+Flask API test
+
+Docker container running
+
+Kubernetes pods/services
+
+Airflow UI
+
+Jenkins pipeline
+
+MLflow UI
+
+🎥 Presentation Video:
+
+You don’t need to re-explain deployment stages already shown in the regression part.
+
+Just mention that similar steps were followed, focusing only on what’s new or different in the classification.
+
+##############################################################################################################
+
+🔐 Safety Strategy for New Additions
+We will:
+
+✅ 1. Use Unique Container/Image Names
+Use prefixes like:
+
+gender-mlflow
+
+gender-airflow-webserver
+
+gender-airflow-scheduler
+
+gender-postgres
+
+gender-jenkins
+
+gender-k8s-deploy (if needed)
+
+✅ 2. Assign Non-Conflicting Ports
+Avoid these already used ports:
+
+5000 – already taken by both MLflow-1 & gender-classifier Flask app
+
+8080, 5001, 8501 — already used by existing services
+
+For new services, we can safely use:
+
+MLflow UI: 5500
+
+Airflow Webserver: 5800
+
+PostgreSQL (if needed): 5433
+
+Flask alt port (if parallel run needed): 5050
+
+Jenkins (alt): 5055
+
+✅ 3. Use Separate Docker Volumes & Networks
+We'll use new named volumes like:
+
+gender_mlflow_artifacts
+
+gender_airflow_db_volume
+
+And a dedicated Docker network:
+
+gender_pipeline_net
+
+⚙️ Suggested Order to Proceed
+✅ Add MLflow to train_model.py for experiment tracking
+
+Use port 5500
+
+Image: gender-mlflow
+
+⚙️ Integrate Airflow for automation
+
+Use image: gender-airflow:<tag>
+
+Isolated from your existing Airflow DAGs and scheduler
+
+🚢 Kubernetes Deployment (Optional/Advanced)
+
+Use namespace gender-classifier
+
+Deploy Docker image for model serving
+
+⚙️ Optional Jenkins for CI/CD, using gender-jenkins image

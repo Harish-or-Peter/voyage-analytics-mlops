@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flight-price-api
+  labels:
+    app: flight-price-api
+spec:
+  replicas: 2                 # start with 2 pods
+  selector:
+    matchLabels:
+      app: flight-price-api
+  template:
+    metadata:
+      labels:
+        app: flight-price-api
+    spec:
+      containers:
+        - name: api
+          image: harish080298/flight-price-api:v1   # <‑‑ push first, then update here
+          ports:
+            - containerPort: 5000
+          resources:            # sane limits
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+          livenessProbe:        # Kubernetes restarts if unhealthy
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 30

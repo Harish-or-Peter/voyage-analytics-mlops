@@ -1,0 +1,33 @@
+1. Stop and remove the existing container
+docker stop jenkins && docker rm jenkins
+
+2. Remove the persistent volume (this is the key step)
+docker volume rm jenkins_home
+
+3. Run Jenkins again fresh with location mounted
+docker run -d -p 8080:8080 -p 50000:50000 --name jenkins --user root -v jendocker run -d -p 8080:8080 -p 50000:50000 --name jenkins --user root -v jenkins_home:/var/jenkins_home -v "/var/run/docker.sock:/var/run/docker.sock" -v "C:/Users/Harish/Desktop/Harish/M.Sc/mlops-travel-capstone:/home/project" jenkins/jenkins:lts
+
+3.1 Get password
+docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+
+4. Go to http://localhost:8080, it should:
+>Ask for the unlock password again
+>Prompt to install plugins
+>Show no previous jobs or data
+
+5. Install plugins
+>Pipeline
+>Docker Pipeline
+>AnsiColor
+
+5. Intall Python
+>docker exec -u 0 -it jenkins bash
+>apt update && apt install -y python3 python3-pip
+>python3 --version 
+
+6. Install Docker inside junkins
+>docker exec -u 0 -it jenkins bash
+>apt update && apt install -y docker.io
+>docker exec -it jenkins docker version
+
+7. Create pipelie

@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Navigate to project') {
+            steps {
+                dir('/home/project/regression_model') {
+                    sh 'pwd && ls -la'
+                }
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('/home/project/regression_model') {
+                    sh 'python3 -m pip install --break-system-packages -r requirements.txt'
+                }
+            }
+        }
+
+        stage('Train Model') {
+            steps {
+                dir('/home/project/regression_model') {
+                    sh 'python3 train_model_script.py'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('/home/project/regression_model') {
+                    sh 'docker build -t flight-regression-api -f dockerfile .'
+                }
+            }
+        }
+    }
+}

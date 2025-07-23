@@ -1,0 +1,98 @@
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+myvenv\Scripts\activate
+
+#Recommended Project Folder Structure (GitHub)
+
+📁 mlops-travel-capstone/
+├── 📁 data/
+│   ├── users.csv
+│   ├── flights.csv
+│   └── hotels.csv
+├── 📁 regression_model/
+│   ├── model.pkl
+│   ├── flight_price_predictor.ipynb
+│   ├── app.py  (Flask)
+│   └── requirements.txt
+├── 📁 classification_model/
+│   └── gender_classifier.ipynb
+├── 📁 recommendation_system/
+│   └── recommender.ipynb
+│   └── streamlit_app.py
+├── 📁 docker/
+│   └── Dockerfile
+├── 📁 kubernetes/
+│   └── deployment.yml
+├── 📁 airflow/
+│   └── travel_dag.py
+├── 📁 jenkins/
+│   └── Jenkinsfile
+├── 📁 mlflow/
+│   └── tracking_code.py
+├── 📁 docs/
+│   └── README.md
+│   └── report.docx (or link)
+└── 📁 .github/
+    └── workflows/ci-cd.yaml
+
+#Here's What You're Expected to Deliver
+
+##Models to Build
+| Type           | Goal                                   | Dataset Used      |
+| -------------- | -------------------------------------- | ----------------- |
+| Regression     | Predict flight price                   | `flights.csv`     |
+| Classification | Predict gender from user data          | `users.csv`       |
+| Recommendation | Hotel suggestions based on preferences | `users`, `hotels` |
+
+
+##Full MLOps Workflow to Implement
+| Component         | Description                           |
+| ----------------- | ------------------------------------- |
+| **REST API**      | Serve regression model using Flask    |
+| **Docker**        | Containerize the API                  |
+| **Kubernetes**    | Deploy container with scaling         |
+| **Airflow**       | Automate data/model pipeline          |
+| **Jenkins CI/CD** | Build, test, deploy automatically     |
+| **MLflow**        | Track model versions and performance  |
+| **Streamlit App** | Interactive UI for recommender system |
+
+
+##Final Deliverables
+Google Colab Notebooks (3): Regression, Classification, Recommendation
+
+GitHub Repo (1): All code, Docker, MLFlow, Jenkins, Airflow, etc.
+
+Documentation (Google Doc): Workflow explanation with screenshots (skip installations)
+
+Video Presentation (40+ mins): Explain regression pipeline with MLOps
+
+Drive Links: For code + doc + video
+
+
+
+airflow db init && \
+airflow users create \
+  --username airflow \
+  --password airflow \
+  --firstname Admin \
+  --lastname User \
+  --role Admin \
+  --email airflow@example.com
+
+
+
+
+  ✅ WHAT YOU'VE DONE SO FAR (Progress Map)
+Task	Status	Notes
+Regression model	✅ Done	Saved as .pkl, used for prediction
+Flask REST API	✅ Done	Serves model on port 5000
+Docker containerization	✅ Done	API + Airflow + MLFlow in Docker
+Apache Airflow	✅ Done	DAG trains model and saves artifact
+MLflow	✅ Done	(Assumed you're logging metrics or artifacts)
+GitHub repo	🟡 In progress	Needs structuring
+Jenkins CI/CD	⏳ Not done yet	
+Streamlit app (recommendation UI)	⏳ Needs confirmation	
+Gender classification model	⏳ Needs to be built	
+Recommendation model	⏳ Needs to be built	
+Google Colab notebooks (3)	⏳ Not yet uploaded	
+Documentation with screenshots	⏳ Not started	
+15–40 min Video walkthrough	⏳ Not recorded yet

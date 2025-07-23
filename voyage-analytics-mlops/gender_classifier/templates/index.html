@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gender Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gender Classifier</h1>
+        <form method="post">
+            <label>Name:</label>
+            <input type="text" name="name" required>
+
+            <label>Company:</label>
+            <input type="text" name="company" required>
+
+            <label>Age:</label>
+            <input type="number" name="age" min="0" required>
+
+            <button type="submit">Predict Gender</button>
+            <button type="reset" class="reset-btn">Reset</button>
+        </form>
+
+        {% if prediction %}
+            <div class="result">
+                <h3>Prediction Result:</h3>
+                <p><strong>Name:</strong> {{ name }}</p>
+                <p><strong>Company:</strong> {{ company }}</p>
+                <p><strong>Age:</strong> {{ age }}</p>
+                <p><strong>Predicted Gender:</strong> {{ prediction }}</p>
+            </div>
+        {% elif error %}
+            <div class="error">
+                <p><strong>Error:</strong> {{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
