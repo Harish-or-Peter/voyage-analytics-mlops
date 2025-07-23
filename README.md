@@ -13,13 +13,13 @@ All systems are built with modular ML pipelines, served via APIs or Streamlit ap
 ## 📂 Project Structure
 voyage-analytics-mlops/
 │
-├── regression_model/ # Flight price prediction (ML + API + Jenkins)
-├── classification_model/ # Name-based gender classifier
-├── recommendation_model/ # Hotel recommender Streamlit app
-├── docker-compose.yaml # MLflow + Airflow + Flask container orchestration
-├── screenshots/ # Demo images used in documentation
-├── README.md # You're reading it!
-└── .gitignore # Clean git tracking
+> ├── regression_model/ # Flight price prediction (ML + API + Jenkins)
+> ├── classification_model/ # Name-based gender classifier
+> ├── recommendation_model/ # Hotel recommender Streamlit app
+> ├── docker-compose.yaml # MLflow + Airflow + Flask container orchestration
+> ├── screenshots/ # Demo images used in documentation
+> ├── README.md # You're reading it!
+> └── .gitignore # Clean git tracking
 
 ## 🚀 How to Run
 
